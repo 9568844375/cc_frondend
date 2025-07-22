@@ -1,0 +1,766 @@
+/* CampusConnect Simple, Innovative Theme */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* Global Reset and Base Styles */
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: #f7fafc;
+  color: #1a2233;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+/* Remove unused elements */
+#neon-bg,
+.lexi-blobs-bg {
+  display: none;
+}
+
+/* Enhanced Glassmorphism */
+.glassmorphism {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 18px;
+  box-shadow: 0 4px 24px 0 rgba(30, 60, 120, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); /* Safari support */
+}
+
+.glassy-shadow {
+  box-shadow: 0 2px 8px 0 rgba(30, 60, 120, 0.10);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 50%;
+}
+
+/* Lexi Trigger Button */
+.lexi-trigger {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1000;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: none;
+  outline: none;
+  box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
+  position: relative;
+}
+
+.lexi-trigger:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 24px rgba(102, 126, 234, 0.6);
+}
+
+.lexi-trigger:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+}
+
+.lexi-trigger.open {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.bubble-anim {
+  color: white;
+  transition: transform 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lexi-trigger:hover .bubble-anim {
+  transform: scale(1.1);
+}
+
+.user-indicator {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: #4CAF50;
+  color: white;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 700;
+  border: 2px solid white;
+  z-index: 1;
+}
+
+/* Enhanced Popup */
+.lexi-popup {
+  position: fixed;
+  bottom: 7rem;
+  right: 2rem;
+  width: 26rem;
+  max-width: 95vw;
+  height: 32rem;
+  max-height: 85vh;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  animation: slideUp 0.3s ease-out;
+  overflow: hidden; /* Fixed: Prevent content overflow */
+}
+
+@keyframes slideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Enhanced Header */
+.lexi-header {
+  padding: 1rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  border-radius: 16px 16px 0 0;
+  position: relative;
+  flex-shrink: 0; /* Fixed: Prevent header shrinking */
+}
+
+.lexi-avatar {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.2rem;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  flex-shrink: 0; /* Fixed: Prevent avatar shrinking */
+}
+
+.header-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 0; /* Fixed: Allow text truncation */
+}
+
+.header-info .title {
+  font-weight: 700;
+  font-size: 1.1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; /* Fixed: Handle long titles */
+}
+
+.header-info .user-info {
+  font-size: 0.85rem;
+  opacity: 0.9;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; /* Fixed: Handle long user info */
+}
+
+.connection-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+}
+
+.connection-indicator.connected {
+  background-color: #10b981;
+}
+
+.connection-indicator.disconnected {
+  background-color: #ef4444;
+}
+
+.connection-indicator.connecting {
+  background-color: #f59e0b;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.clear-chat-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  padding: 0.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0; /* Fixed: Prevent button shrinking */
+}
+
+.clear-chat-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Enhanced Body */
+.lexi-body {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden; /* Fixed: Prevent horizontal overflow */
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+  scrollbar-width: thin;
+  scrollbar-color: rgba(102, 126, 234, 0.3) transparent;
+  min-height: 0; /* Fixed: Allow flex shrinking */
+}
+
+.lexi-body::-webkit-scrollbar {
+  width: 4px;
+}
+
+.lexi-body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.lexi-body::-webkit-scrollbar-thumb {
+  background: rgba(102, 126, 234, 0.3);
+  border-radius: 2px;
+}
+
+.lexi-body::-webkit-scrollbar-thumb:hover {
+  background: rgba(102, 126, 234, 0.5);
+}
+
+/* Welcome Section */
+.welcome-section {
+  text-align: center;
+  padding: 1rem 0;
+}
+
+.greeting {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #334155;
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+}
+
+.suggestions-container {
+  margin-bottom: 1.5rem;
+}
+
+.suggestion-carousel {
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 12px;
+  padding: 0.75rem;
+  margin: 0.5rem 0;
+  border: 1px solid rgba(102, 126, 234, 0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.suggestion-carousel:hover {
+  border-color: rgba(102, 126, 234, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.1);
+}
+
+.suggestion-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: none;
+  border: none;
+  color: #475569;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 8px;
+  transition: all 0.2s;
+  width: 100%;
+  text-align: left;
+  font-size: 0.9rem;
+}
+
+.suggestion-btn:hover {
+  background: rgba(102, 126, 234, 0.1);
+  color: #667eea;
+}
+
+.suggestion-btn:focus-visible {
+  outline: 2px solid #667eea;
+  outline-offset: 2px;
+}
+
+.suggestion-btn .icon {
+  color: #667eea;
+  font-size: 1.2rem;
+  flex-shrink: 0; /* Fixed: Prevent icon shrinking */
+}
+
+.suggestion-btn .text {
+  flex: 1;
+  min-width: 0; /* Fixed: Allow text truncation */
+}
+
+.privacy-notice {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: #64748b;
+  opacity: 0.8;
+}
+
+/* Enhanced Message Bubbles */
+.lexi-message-bubble {
+  max-width: 85%;
+  padding: 0.75rem 1rem;
+  border-radius: 16px;
+  margin-bottom: 0.5rem;
+  position: relative;
+  animation: fadeIn 0.3s ease-out;
+  word-wrap: break-word; /* Fixed: Handle long words */
+  overflow-wrap: break-word; /* Fixed: Better word breaking */
+}
+
+.lexi-message-bubble.user {
+  align-self: flex-end;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-bottom-right-radius: 4px;
+}
+
+.lexi-message-bubble.lexi {
+  align-self: flex-start;
+  background: rgba(255, 255, 255, 0.9);
+  color: #334155;
+  border: 1px solid rgba(102, 126, 234, 0.1);
+  border-bottom-left-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.lexi-message-bubble.error {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #dc2626;
+  align-self: flex-start;
+}
+
+.lexi-message-bubble.loading {
+  background: rgba(102, 126, 234, 0.1);
+  border: 1px solid rgba(102, 126, 234, 0.2);
+  align-self: flex-start;
+}
+
+.message-content {
+  font-size: 0.95rem;
+  line-height: 1.4;
+  margin-bottom: 0.25rem;
+  white-space: pre-wrap; /* Fixed: Preserve formatting */
+}
+
+.message-timestamp {
+  font-size: 0.75rem;
+  opacity: 0.6;
+  text-align: right;
+}
+
+/* Typing Animation */
+.typing-dots {
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
+  padding: 0.5rem 0;
+}
+
+.typing-dots span {
+  width: 6px;
+  height: 6px;
+  background: #667eea;
+  border-radius: 50%;
+  animation: bounce 1.4s infinite ease-in-out;
+}
+
+.typing-dots span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-dots span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+  40% {
+    transform: translateY(-8px);
+    opacity: 1;
+  }
+  60% {
+    transform: translateY(-4px);
+    opacity: 0.8;
+  }
+}
+
+/* Enhanced Footer */
+.lexi-footer {
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.95);
+  border-top: 1px solid rgba(102, 126, 234, 0.1);
+  display: flex;
+  align-items: flex-end;
+  gap: 0.75rem;
+  border-radius: 0 0 16px 16px;
+  flex-shrink: 0; /* Fixed: Prevent footer shrinking */
+}
+
+.lexi-input {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(102, 126, 234, 0.2);
+  border-radius: 12px;
+  padding: 0.75rem;
+  display: flex;
+  align-items: flex-end;
+  gap: 0.5rem;
+  transition: border-color 0.2s;
+  min-width: 0; /* Fixed: Allow input to shrink */
+}
+
+.lexi-input:focus-within {
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.lexi-input textarea {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #334155;
+  font-size: 0.95rem;
+  font-family: inherit;
+  resize: none;
+  max-height: 100px;
+  min-height: 20px;
+  line-height: 1.4;
+  min-width: 0; /* Fixed: Allow textarea to shrink */
+}
+
+.lexi-input textarea::placeholder {
+  color: #94a3b8;
+}
+
+.mic-button {
+  background: none;
+  border: none;
+  color: #667eea;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 8px;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0; /* Fixed: Prevent button shrinking */
+  width: 32px;
+  height: 32px;
+}
+
+.mic-button:hover:not(:disabled) {
+  background: rgba(102, 126, 234, 0.1);
+}
+
+.mic-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.lexi-send {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  color: white;
+  padding: 0;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0; /* Fixed: Prevent button shrinking */
+}
+
+.lexi-send:hover:not(:disabled) {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.lexi-send:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Error Message */
+.error-message {
+  background: rgba(239, 68, 68, 0.1);
+  color: #dc2626;
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin: 0.5rem 0;
+}
+
+.error-message button {
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+.error-message button:hover {
+  background: rgba(239, 68, 68, 0.1);
+}
+
+/* Feedback Section */
+.feedback-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 0.75rem;
+  background: rgba(255, 255, 255, 0.9);
+  border-top: 1px solid rgba(102, 126, 234, 0.1);
+  font-size: 0.9rem;
+  color: #64748b;
+  flex-shrink: 0; /* Fixed: Prevent feedback row shrinking */
+}
+
+.feedback-btn {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 8px;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.feedback-btn.positive:hover {
+  background: rgba(34, 197, 94, 0.1);
+  color: #16a34a;
+}
+
+.feedback-btn.negative:hover {
+  background: rgba(239, 68, 68, 0.1);
+  color: #dc2626;
+}
+
+.feedback-btn:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+.feedback-confirmation {
+  text-align: center;
+  padding: 0.75rem;
+  background: rgba(34, 197, 94, 0.1);
+  color: #16a34a;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border-top: 1px solid rgba(34, 197, 94, 0.2);
+}
+
+.proactive-suggestion {
+  text-align: center;
+  padding: 0.75rem;
+  background: rgba(102, 126, 234, 0.05);
+  color: #667eea;
+  font-size: 0.85rem;
+  font-style: italic;
+  border-top: 1px solid rgba(102, 126, 234, 0.1);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
+
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .lexi-popup {
+    width: calc(100vw - 1rem);
+    right: 0.5rem;
+    bottom: 5.5rem;
+    height: calc(100vh - 7rem);
+    max-height: calc(100vh - 7rem);
+  }
+  
+  .lexi-trigger {
+    width: 3.5rem;
+    height: 3.5rem;
+    bottom: 1.5rem;
+    right: 1.5rem;
+  }
+  
+  .lexi-header {
+    padding: 0.75rem;
+  }
+  
+  .lexi-header .title {
+    font-size: 1rem;
+  }
+  
+  .lexi-header .user-info {
+    font-size: 0.8rem;
+  }
+  
+  .lexi-body {
+    padding: 0.75rem;
+  }
+  
+  .lexi-footer {
+    padding: 0.75rem;
+  }
+  
+  .lexi-message-bubble {
+    max-width: 90%;
+    font-size: 0.9rem;
+  }
+  
+  .suggestion-btn {
+    font-size: 0.85rem;
+    gap: 0.5rem;
+  }
+  
+  .greeting {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .lexi-popup {
+    width: calc(100vw - 0.5rem);
+    right: 0.25rem;
+    height: calc(100vh - 6rem);
+    max-height: calc(100vh - 6rem);
+  }
+  
+  .lexi-trigger {
+    width: 3rem;
+    height: 3rem;
+    bottom: 1rem;
+    right: 1rem;
+  }
+  
+  .user-indicator {
+    width: 16px;
+    height: 16px;
+    font-size: 8px;
+  }
+  
+  .lexi-header {
+    padding: 0.5rem;
+  }
+  
+  .lexi-avatar {
+    width: 2rem;
+    height: 2rem;
+    font-size: 1rem;
+  }
+  
+  .lexi-body {
+    padding: 0.5rem;
+  }
+  
+  .lexi-footer {
+    padding: 0.5rem;
+  }
+  
+  .lexi-message-bubble {
+    max-width: 95%;
+    font-size: 0.85rem;
+  }
+  
+  .suggestion-btn {
+    font-size: 0.8rem;
+    gap: 0.25rem;
+  }
+  
+  .greeting {
+    font-size: 0.9rem;
+  }
+}

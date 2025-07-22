@@ -1,0 +1,1150 @@
+/* CampusConnect Enhanced Auth Theme */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* Root Variables */
+:root {
+  --primary-color: #667eea;
+  --primary-dark: #5a67d8;
+  --secondary-color: #764ba2;
+  --success-color: #10b981;
+  --warning-color: #f59e0b;
+  --error-color: #ef4444;
+  --background-color: #f8fafc;
+  --card-background: #ffffff;
+  --text-primary: #1a202c;
+  --text-secondary: #4a5568;
+  --text-muted: #718096;
+  --border-color: #e2e8f0;
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --border-radius: 0.75rem;
+  --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.6;
+  color: var(--text-primary);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background-attachment: fixed;
+  overflow-x: hidden;
+}
+
+/* Add text-size-adjust for Chrome, Edge, Firefox, Safari */
+html {
+  -webkit-text-size-adjust: 100%; /* iOS Safari */
+  text-size-adjust: 100%;         /* Chrome, Edge, Firefox, Safari */
+}
+
+/* Auth Container */
+.auth-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  position: relative;
+}
+
+.auth-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 40% 80%, rgba(120, 119, 198, 0.2) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+/* Auth Card */
+.auth-card {
+  width: 100%;
+  max-width: 450px;
+  background: var(--card-background);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-xl);
+  padding: 2.5rem;
+  position: relative;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); /* Safari 9+ */
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  animation: slideUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1;
+}
+
+.auth-card.signup-card {
+  max-width: 520px;
+}
+
+/* Campus Logo */
+.campus-logo {
+  text-align: center;
+  margin-bottom: 2rem;
+  animation: fadeInDown 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.logo-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.logo-svg {
+  width: 80px;
+  height: 80px;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.campus-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.campus-subtitle {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+/* Hidden Connection Status for Auth Pages */
+.auth-container .connection-status {
+  display: none !important;
+}
+
+/* Step Indicator */
+.step-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2rem;
+  gap: 1rem;
+  animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.2s both;
+}
+
+.step {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background: var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--text-muted);
+  transition: var(--transition);
+  position: relative;
+  z-index: 1;
+  border: 2px solid transparent;
+}
+
+.step.active {
+  background: var(--primary-color);
+  color: white;
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.step-line {
+  width: 3rem;
+  height: 3px;
+  background: var(--border-color);
+  border-radius: 1.5px;
+}
+
+/* Form Styles */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.3s both;
+}
+
+.form-step h3 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.375rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.form-group {
+  position: relative;
+  margin-bottom: 1.5rem;
+  width: 100%;
+}
+
+/* Enhanced Input Wrapper - Fixed positioning */
+.input-wrapper {
+  position: relative;
+  display: block;
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+
+.input-icon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  color: var(--text-muted);
+  font-size: 1rem;
+  pointer-events: none;
+  transition: var(--transition);
+}
+
+/* Universal form input styling for all input types */
+.form-input,
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"],
+input[type="number"],
+textarea,
+select {
+  width: 100%;
+  padding: 1rem 1rem 1rem 3rem; /* Consistent padding for all inputs */
+  border: 2px solid var(--border-color);
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  transition: var(--transition);
+  background-color: var(--card-background) !important; /* Force consistent background */
+  color: var(--text-primary) !important; /* Force consistent text color */
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  z-index: 1;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Special handling for inputs with icons */
+.input-wrapper .form-input,
+.input-wrapper input[type="text"],
+.input-wrapper input[type="email"],
+.input-wrapper input[type="password"],
+.input-wrapper input[type="tel"],
+input-wrapper input[type="number"],
+.input-wrapper textarea,
+.input-wrapper select {
+  padding-left: 3rem; /* Space for icon */
+}
+
+/* Special handling for password inputs with toggle button */
+.input-wrapper.has-password-toggle .form-input,
+.input-wrapper.has-password-toggle input[type="password"] {
+  padding-right: 3rem; /* Space for toggle button */
+}
+
+/* Enhanced Select dropdown styling - Apply to all selects */
+select.form-input,
+select,
+.form-input[data-type="select"] {
+  padding: 1rem 2.5rem 1rem 3rem; /* Adjusted padding for dropdown arrow */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  background-color: var(--card-background) !important;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23718096' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 1rem;
+  color: var(--text-primary) !important;
+}
+
+/* Fix for select options styling - Apply to all select options */
+select.form-input option,
+select option,
+.form-input[data-type="select"] option {
+  background-color: var(--card-background) !important;
+  color: var(--text-primary) !important;
+  padding: 0.5rem;
+  font-family: inherit;
+}
+
+/* Enhanced focus state for all form inputs */
+.form-input:focus,
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="tel"]:focus,
+input[type="number"]:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--primary-color) !important;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1) !important;
+  outline: none !important;
+  background-color: var(--card-background) !important;
+  color: var(--text-primary) !important;
+}
+
+/* Enhanced hover state for all form inputs */
+.form-input:hover,
+input[type="text"]:hover,
+input[type="email"]:hover,
+input[type="password"]:hover,
+input[type="tel"]:hover,
+input[type="number"]:hover,
+textarea:hover,
+select:hover {
+  border-color: var(--primary-color);
+  background-color: var(--card-background) !important;
+  color: var(--text-primary) !important;
+}
+
+/* Icon color change on focus for all inputs */
+.form-input:focus + .input-icon,
+input:focus + .input-icon,
+textarea:focus + .input-icon,
+select:focus + .input-icon {
+  color: var(--primary-color);
+}
+
+/* Placeholder styling for all inputs */
+.form-input::placeholder,
+input[type="text"]::placeholder,
+input[type="email"]::placeholder,
+input[type="password"]::placeholder,
+input[type="tel"]::placeholder,
+input[type="number"]::placeholder,
+textarea::placeholder {
+  color: var(--text-muted) !important;
+  opacity: 0.7;
+  font-weight: 400;
+}
+
+/* Textarea specific styling */
+textarea.form-input,
+textarea {
+  min-height: 100px;
+  resize: vertical;
+  padding: 1rem 1rem 1rem 3rem;
+}
+
+/* Autofill styling fix for all inputs */
+.form-input:-webkit-autofill,
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px var(--card-background) inset !important;
+  -webkit-text-fill-color: var(--text-primary) !important;
+  background-color: var(--card-background) !important;
+  color: var(--text-primary) !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* Fix for Chrome autofill */
+.form-input:-webkit-autofill:focus,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px var(--card-background) inset !important;
+  -webkit-text-fill-color: var(--text-primary) !important;
+  background-color: var(--card-background) !important;
+  border-color: var(--primary-color) !important;
+}
+
+/* Enhanced Password toggle button - Fixed positioning */
+.password-toggle {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  transition: var(--transition);
+  border-radius: 0.375rem;
+  width: 2rem;
+  height: 2rem;
+}
+
+.password-toggle:hover {
+  color: var(--primary-color);
+  background-color: rgba(102, 126, 234, 0.1);
+}
+
+/* Field error styling */
+.field-error {
+  display: block;
+  color: var(--error-color);
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+  font-weight: 500;
+  animation: slideDown 0.3s ease-out;
+}
+
+/* Enhanced Password Strength Indicator */
+.password-strength {
+  margin-top: 0.75rem;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.password-strength-bar {
+  width: 100%;
+  height: 6px;
+  background: var(--border-color);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 0.75rem;
+}
+
+.password-strength-fill {
+  height: 100%;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 3px;
+}
+
+.password-requirements {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 0.5rem;
+  font-size: 0.75rem;
+}
+
+.requirement {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  color: var(--text-muted);
+  transition: var(--transition);
+  padding: 0.375rem 0.5rem;
+  border-radius: 0.375rem;
+  background: rgba(0, 0, 0, 0.02);
+  border: 1px solid transparent;
+}
+
+.requirement.met {
+  color: var(--success-color);
+  background: rgba(16, 185, 129, 0.1);
+  border-color: rgba(16, 185, 129, 0.2);
+}
+
+/* Enhanced Form Options - Fixed checkbox click functionality */
+.form-options {
+  display: block;
+  margin: 1.5rem 0;
+  clear: both;
+  position: relative;
+  z-index: 10;
+  pointer-events: auto !important;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  cursor: pointer !important;
+  padding: 12px 8px;
+  margin: 0;
+  position: relative;
+  background: transparent;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+  pointer-events: auto !important;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+}
+
+.checkbox-label:hover {
+  background-color: rgba(102, 126, 234, 0.08);
+}
+
+/* Checkbox input styling - Fixed click functionality */
+.checkbox-label input[type="checkbox"] {
+  width: 20px !important;
+  height: 20px !important;
+  min-width: 20px !important;
+  min-height: 20px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 2px solid #cbd5e0 !important;
+  border-radius: 4px !important;
+  background-color: #ffffff !important;
+  cursor: pointer !important;
+  position: relative !important;
+  flex-shrink: 0 !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  z-index: 15 !important;
+  pointer-events: auto !important;
+  touch-action: manipulation !important;
+}
+
+.checkbox-label input[type="checkbox"]:checked {
+  background-color: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+}
+
+.checkbox-label input[type="checkbox"]:checked::before {
+  content: "✓" !important;
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  color: white !important;
+  font-size: 14px !important;
+  font-weight: bold !important;
+  line-height: 1 !important;
+  display: block !important;
+  pointer-events: none !important;
+}
+
+.checkbox-label input[type="checkbox"]:focus {
+  outline: 2px solid var(--primary-color) !important;
+  outline-offset: 2px !important;
+}
+
+.checkbox-label input[type="checkbox"]:hover {
+  border-color: var(--primary-color) !important;
+  transform: scale(1.05) !important;
+}
+
+/* Checkbox text styling */
+.checkbox-text {
+  flex: 1;
+  color: #ffffff !important;
+  font-size: 14px !important;
+  line-height: 1.6 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  font-weight: 400 !important;
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: none !important; /* Text doesn't intercept clicks */
+}
+
+.checkbox-text a {
+  color: #667eea !important;
+  text-decoration: none !important;
+  font-weight: 500 !important;
+  pointer-events: auto !important; /* Links are clickable */
+}
+
+.checkbox-text a:hover {
+  text-decoration: underline !important;
+  color: #5a67d8 !important;
+}
+
+/* Remove any potential blocking elements */
+.checkbox-label::before,
+.checkbox-label::after {
+  display: none !important;
+}
+
+/* Ensure no other elements are blocking */
+.auth-form * {
+  position: relative;
+}
+
+.auth-form .form-options {
+  position: relative !important;
+  z-index: 20 !important;
+}
+
+/* Force click area for the entire label */
+.checkbox-label {
+  position: relative !important;
+  z-index: 12 !important;
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Mobile touch improvements */
+@media (max-width: 768px) {
+  .checkbox-label input[type="checkbox"] {
+    width: 24px !important;
+    height: 24px !important;
+    min-width: 24px !important;
+    min-height: 24px !important;
+    touch-action: manipulation !important;
+  }
+  
+  .checkbox-label {
+    padding: 16px 12px !important;
+    min-height: 48px !important;
+    touch-action: manipulation !important;
+  }
+}
+
+/* Enhanced Link button styling - Fixed z-index and positioning */
+.link-button {
+  background: none;
+  border: none;
+  color: var(--primary-color);
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: var(--transition);
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  white-space: nowrap;
+  position: relative;
+  z-index: 13;
+  display: inline-block;
+  margin-left: auto; /* Push to right */
+}
+
+.link-button:hover {
+  color: var(--primary-dark);
+  background: rgba(102, 126, 234, 0.1);
+  text-decoration: underline;
+}
+
+/* Enhanced Submit Button */
+.submit-button {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  border: none;
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+  min-height: 3rem;
+  z-index: 1;
+}
+
+.submit-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.submit-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.submit-button:hover:not(:disabled)::before {
+  left: 100%;
+}
+
+.submit-button:active:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.submit-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.loading-content {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: white;
+}
+
+/* Enhanced Step Navigation */
+.step-navigation {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+  gap: 1rem;
+}
+
+.step-button {
+  padding: 1rem 1.5rem;
+  border: 2px solid var(--primary-color);
+  border-radius: var(--border-radius);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  flex: 1;
+  min-width: 120px;
+  min-height: 3rem;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  z-index: 1;
+}
+
+.step-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  transition: left 0.3s;
+}
+
+.step-button:hover::before {
+  left: 100%;
+}
+
+.step-button.secondary {
+  background: transparent;
+  color: var(--primary-color);
+}
+
+.step-button.secondary:hover:not(:disabled) {
+  background: var(--primary-color);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.step-button.primary {
+  background: var(--primary-color);
+  color: white;
+}
+
+.step-button.primary:hover:not(:disabled) {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.step-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Enhanced Auth Footer */
+.auth-footer {
+  text-align: center;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-color);
+  animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.4s both;
+}
+
+.auth-footer p {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  margin: 0;
+  font-weight: 500;
+}
+
+/* Security Notice */
+.security-notice {
+  text-align: center;
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background: rgba(245, 158, 11, 0.1);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  border-radius: var(--border-radius);
+  color: var(--warning-color);
+  font-size: 0.875rem;
+  font-weight: 500;
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Enhanced Alert Styles */
+.error-alert {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: var(--border-radius);
+  padding: 1rem;
+  margin-bottom: 1rem;
+  color: var(--error-color);
+  font-size: 0.875rem;
+  font-weight: 500;
+  animation: slideDown 0.3s ease-out;
+}
+
+.success-alert {
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  border-radius: var(--border-radius);
+  padding: 1rem;
+  margin-bottom: 1rem;
+  color: var(--success-color);
+  font-size: 0.875rem;
+  font-weight: 500;
+  animation: slideDown 0.3s ease-out;
+}
+
+/* Enhanced Animations */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+    max-height: 0;
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    max-height: 100px;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+/* Enhanced Responsive Design - Updated for better mobile experience */
+@media (max-width: 768px) {
+  .auth-card {
+    padding: 2rem;
+    margin: 1rem;
+  }
+  
+  .form-input,
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="tel"],
+  input[type="number"],
+  textarea,
+  select {
+    padding: 0.875rem 2.5rem 0.875rem 2.75rem;
+    font-size: 0.9rem;
+  }
+  
+  .input-wrapper.has-password-toggle .form-input,
+  .input-wrapper.has-password-toggle input[type="password"] {
+    padding-right: 2.75rem;
+  }
+  
+  .input-icon {
+    left: 0.75rem;
+    font-size: 0.875rem;
+  }
+  
+  .password-toggle {
+    right: 0.75rem;
+    font-size: 0.875rem;
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .form-input,
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="tel"],
+  input[type="number"],
+  textarea,
+  select {
+    padding: 0.75rem 2.25rem 0.75rem 2.5rem;
+    font-size: 0.85rem;
+  }
+  
+  .input-wrapper.has-password-toggle .form-input,
+  .input-wrapper.has-password-toggle input[type="password"] {
+    padding-right: 2.5rem;
+  }
+  
+  .input-icon {
+    left: 0.625rem;
+    font-size: 0.8rem;
+  }
+  
+  .password-toggle {
+    right: 0.625rem;
+    font-size: 0.8rem;
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+}
+
+/* Fix for overlapping issues */
+.form-group {
+  position: relative;
+  margin-bottom: 1.5rem;
+  width: 100%;
+  isolation: isolate; /* Create new stacking context */
+}
+
+/* Ensure proper text contrast and visibility */
+.checkbox-text,
+.auth-footer p {
+  color: var(--text-primary) !important;
+  font-weight: 500;
+}
+
+/* Fix checkbox interaction area */
+.checkbox-label input[type="checkbox"]:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* Ensure buttons don't overlap with checkboxes */
+.step-navigation {
+  margin-top: 2rem;
+  position: relative;
+  z-index: 5;
+  clear: both;
+}
+
+/* Additional fix for form layout */
+.auth-form {
+  position: relative;
+  z-index: 1;
+}
+
+/* Enhanced accessibility and dark mode support */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background-color: #1a202c;
+    --card-background: #2d3748;
+    --text-primary: #f7fafc;
+    --text-secondary: #e2e8f0;
+    --text-muted: #a0aec0;
+    --border-color: #4a5568;
+  }
+  
+  .auth-card {
+    background: rgba(45, 55, 72, 0.95);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .form-input,
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="tel"],
+  input[type="number"],
+  textarea,
+  select {
+    background-color: var(--card-background) !important;
+    border-color: var(--border-color);
+    color: var(--text-primary) !important;
+  }
+  
+  /* Dark mode select options */
+  select option {
+    background-color: var(--card-background) !important;
+    color: var(--text-primary) !important;
+  }
+  
+  /* Dark mode autofill */
+  .form-input:-webkit-autofill,
+  input:-webkit-autofill,
+  textarea:-webkit-autofill,
+  select:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px var(--card-background) inset !important;
+    -webkit-text-fill-color: var(--text-primary) !important;
+  }
+}
+
+/* Focus Styles for Accessibility */
+.form-input:focus-visible,
+.submit-button:focus-visible,
+.step-button:focus-visible,
+.link-button:focus-visible,
+.password-toggle:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  :root {
+    --primary-color: #0066cc;
+    --secondary-color: #4a0080;
+    --border-color: #000000;
+    --text-primary: #000000;
+    --text-secondary: #333333;
+  }
+  
+  .form-input {
+    border-width: 2px;
+  }
+  
+  .submit-button {
+    border: 2px solid var(--primary-color);
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .logo-svg {
+    animation: none;
+  }
+}
+
+/* Additional utility classes */
+.loading {
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.form-step {
+  animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.form-group {
+  transition: var(--transition);
+}
+
+.form-group:hover .input-icon {
+  color: var(--primary-color);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.auth-card:hover {
+  box-shadow: 0 25px 30px -5px rgba(0, 0, 0, 0.15), 0 15px 15px -5px rgba(0, 0, 0, 0.08);
+}
+
+/* Fix for potential text overlapping */
+.form-input,
+.submit-button,
+.step-button,
+.link-button {
+  font-family: inherit;
+  line-height: 1.5;
+}
+
+/* Ensure proper stacking context */
+.input-wrapper {
+  position: relative;
+  isolation: isolate;
+}
+
+.form-group {
+  position: relative;
+  isolation: isolate;
+}
+
+/* Fix specific color issues */
+.checkbox-text,
+.auth-footer p,
+.requirement {
+  color: var(--text-primary);
+}
+
+.link-button {
+  color: var(--primary-color) !important;
+}
+
+.link-button:hover {
+  color: var(--primary-dark) !important;
+}
